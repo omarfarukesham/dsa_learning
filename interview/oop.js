@@ -8,4 +8,4 @@ class Human {
 
 const user1 = new Human('Omar', 12, 'Dhaka');
 
-console.log(user1.address); // Output: 12
+console.log(user1.age); // Output: 12
