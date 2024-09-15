@@ -5,7 +5,10 @@ const roundElement = document.getElementById("current-round");
 const rollsElement = document.getElementById("current-round-rolls");
 const totalScoreElement = document.getElementById("total-score");
 const scoreHistory = document.getElementById("score-history");
+
 const rollDiceBtn = document.getElementById("roll-dice-btn");
+
+
 const keepScoreBtn = document.getElementById("keep-score-btn");
 const rulesContainer = document.querySelector(".rules-container");
 const rulesBtn = document.getElementById("rules-btn");
@@ -18,15 +21,21 @@ let rolls = 0;
 
 
   const generateRandomNum = ()=>{
-        let diceValuesArr = []
-        const generateName = Math.floor(Math.random()*6 + 1)
-        console.log(generateName)
-        diceValuesArr.push(generateName)
-
+         diceValuesArr = []
+        for(let i = 0; i < 5; i++){
+          const generateName = Math.floor(Math.random()*6 + 1)
+          diceValuesArr.push(generateName)
+        }
+        console.log(diceValuesArr)
+    
+        listOfAllDice.forEach((dice, index) => {
+          dice.textContent = diceValuesArr[index];
+        });
   }
 
 rollDiceBtn.addEventListener("click", () => {
-  generateRandomNum();
+  generateRandomNum()
+  
 });
 
 
