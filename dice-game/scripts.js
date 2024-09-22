@@ -130,6 +130,32 @@ const resetGame = () => {
   resetRadioOptions();
 };
 
+const checkForStraights = (arr) => {
+  // Sort the array to easily detect consecutive numbers
+  const sortedArr = [...arr].sort((a, b) => a - b);
+
+  // Remove duplicates from the sorted array for easier comparison
+  const uniqueSortedArr = [...new Set(sortedArr)];
+
+  // Check for a small straight (any four consecutive numbers)
+  const smallStraightPossible = uniqueSortedArr.join('').includes('1234') ||
+                                uniqueSortedArr.join('').includes('2345') ||
+                                uniqueSortedArr.join('').includes('3456');
+  
+  // Check for a large straight (any five consecutive numbers)
+  const largeStraightPossible = uniqueSortedArr.join('') === '12345' ||
+                                uniqueSortedArr.join('') === '23456';
+
+  // Update the corresponding radio buttons
+  if (largeStraightPossible) {
+    updateRadioOption(4, 40);  // Large straight updates the 5th radio button to 40
+    updateRadioOption(3, 30);  // Also update the 4th radio button to 30 as per requirement
+  } else if (smallStraightPossible) {
+    updateRadioOption(3, 30);  // Small straight updates the 4th radio button to 30
+  } else {
+    updateRadioOption(5, 0);   // No straight updates the last radio button to 0
+  }
+};
 
 
 rollDiceBtn.addEventListener("click", () => {
@@ -142,6 +168,7 @@ rollDiceBtn.addEventListener("click", () => {
     updateStats();
     getHighestDuplicates(diceValuesArr);
     detectFullHouse(diceValuesArr);
+    checkForStraights()
 
   }
 });
