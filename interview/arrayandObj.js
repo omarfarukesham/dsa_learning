@@ -10,6 +10,10 @@ const person = {
 //     console.log(`${key} : ${person[key]}`)
 // }
 
-Object.values(person).forEach(value => {
-    console.log(value);
-  });
+// Object.values(person).forEach(value => {
+//     console.log(value);
+//   });
+
+Object.keys(person).forEach((key)=>{
+    console.log(key)
+})
