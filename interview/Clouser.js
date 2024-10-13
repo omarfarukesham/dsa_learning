@@ -1,4 +1,4 @@
-function counterFun(){
+function coffeRegister(){
     let count = 0
 
     return function(){
@@ -8,17 +8,24 @@ function counterFun(){
 }
 
 
- const counter1 = counterFun() 
- counter1() //result1 
- counter1() //result1 
- counter1() //result1 
+ const counter1 = coffeRegister() 
+ counter1() // --------1
+ counter1() // --------2
+
 
  console.log('----------------------------------------- ')
 
- const counter2 = counterFun()
- counter2()
- counter2()
+ const counter2 = coffeRegister()
+ counter2() // --------1
+ counter2() // --------2
+ counter2() // ------- 3
+ counter2() // ------- 4
 
 
 
-  
+ console.log('----------------------------------------- ')
+
+ const counter3 = coffeRegister()
+ counter3() // --------1
+ counter3() // --------2
+ counter3() // ------- 3
