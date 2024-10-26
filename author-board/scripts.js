@@ -1,44 +1,98 @@
-const authorContainer = document.getElementById('author-container');
-const loadMoreBtn = document.getElementById('load-more-btn');
+const forumLatest = "https://cdn.freecodecamp.org/curriculum/forum-latest/latest.json";
+const forumTopicUrl = "https://forum.freecodecamp.org/t/";
+const forumCategoryUrl = "https://forum.freecodecamp.org/c/";
+const avatarUrl = "https://sea1.discourse-cdn.com/freecodecamp";
 
-let startingIndex = 0;
-let endingIndex = 8;
-let authorDataArr = [];
+const postsContainer = document.getElementById("posts-container");
 
-fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
-  .then((res) => res.json())
-  .then((data) => {
-    authorDataArr = data;
-    displayAuthors(authorDataArr.slice(startingIndex, endingIndex));  
-  })
-  .catch((err) => {
-    authorContainer.innerHTML = `<p class="error-msg">There was an error loading the authors</p>`
+const allCategories = {
+  299: { category: "Career Advice", className: "career" },
+  409: { category: "Project Feedback", className: "feedback" },
+  417: { category: "freeCodeCamp Support", className: "support" },
+  421: { category: "JavaScript", className: "javascript" },
+  423: { category: "HTML - CSS", className: "html-css" },
+  424: { category: "Python", className: "python" },
+  432: { category: "You Can Do This!", className: "motivation" },
+  560: { category: "Backend Development", className: "backend" },
+};
 
-  });
+const forumCategory = (id) => {
+  let selectedCategory = {};
 
-const fetchMoreAuthors = () => {
-  startingIndex += 8;
-  endingIndex += 8;
+  if (allCategories.hasOwnProperty(id)) {
+    const { className, category } = allCategories[id];
 
-  displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
-  if (authorDataArr.length <= endingIndex) {
-    loadMoreBtn.disabled = true;
-    loadMoreBtn.textContent = 'No more data to load';
   }
 };
 
-const displayAuthors = (authors) => {
-  authors.forEach(({ author, image, url, bio }, index) => {
-    authorContainer.innerHTML += `
-    <div id="${index}" class="user-card">
-      <h2 class="author-name">${author}</h2>
-      <img class="user-img" src="${image}" alt="${author} avatar" />
-      <div class="purple-divider"></div>
-      <p class="bio">${bio.length > 50 ? bio.slice(0, 50) + '...' : bio}</p>
-      <a class="author-link" href="${url}" target="_blank">${author} author page</a>
-    </div>
-  `;
-  });
+const timeAgo = (time) => {
+  const currentTime = new Date();
+  const lastPost = new Date(time);
+
+  const timeDifference = currentTime - lastPost;
+  const msPerMinute = 1000 * 60;
+
+  const minutesAgo = Math.floor(timeDifference / msPerMinute);
+  const hoursAgo = Math.floor(minutesAgo / 60);
+  const daysAgo = Math.floor(hoursAgo / 24);
+
+  if (minutesAgo < 60) {
+    return `${minutesAgo}m ago`;
+  }
+
+  if (hoursAgo < 24) {
+    return `${hoursAgo}h ago`;
+  }
+
+  return `${daysAgo}d ago`;
 };
 
-loadMoreBtn.addEventListener('click', fetchMoreAuthors);
+const viewCount = (views) => {
+  const thousands = Math.floor(views / 1000);
+
+  if (views >= 1000) {
+    return `${thousands}k`;
+  }
+
+  return views;
+};
+
+const fetchData = async () => {
+  try {
+    const res = await fetch(forumLatest);
+    const data = await res.json();
+    showLatestPosts(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+fetchData();
+
+const showLatestPosts = (data) => {
+  const { topic_list, users } = data;
+  const { topics } = topic_list;
+
+  postsContainer.innerHTML = topics.map((item) => {
+    const {
+      id,
+      title,
+      views,
+      posts_count,
+      slug,
+      posters,_id,
+      bumped_at,
+    } = item;
+
+    return `
+    <tr>
+      <td>
+        <p class="post-title">${title}</p>
+      </td>
+      <td></td>
+      <td>${posts_count - 1}</td>
+      <td>${viewCount(views)}</td>
+      <td>${timeAgo(bumped_at)}</td>
+    </tr>`;
+  }).join("");
+};
