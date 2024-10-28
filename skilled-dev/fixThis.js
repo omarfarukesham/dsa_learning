@@ -31,10 +31,19 @@ class User {
   
   // Broken results
   console.log(meeting.getPresenterName()); // undefined (expected ‘Jeni’)
-  users[0].printSeatNumber(); // 3 (expected 0)
-  users[1].printSeatNumber(); // 3 (expected 1)
-  users[2].printSeatNumber(); // 3 (expected 2)
+//   users[0].printSeatNumber(); // 3 (expected 0)
+//   users[1].printSeatNumber(); // 3 (expected 1)
+//   users[2].printSeatNumber(); // 3 (expected 2)
 
+
+// example of var and let
+
+// for(var i = 0; i < 5; i++){
+//    setTimeout(()=>  console.log(i), 500)
+// }
+// for(let i = 0; i < 5; i++){
+//    setTimeout(()=>  console.log(i), 500)
+// }
 
 
 
@@ -58,3 +67,33 @@ class User {
 
 // StudentInfo.school.schoolInf()
 // StudentInfo.admission()
+
+
+// const buttons = [];
+// for (var i = 0; i < 5; i++) {
+//   const button = document.createElement('button');
+//   button.innerText = `Button ${i + 1}`;
+//   button.onclick = function() {
+//     console.log(`You clicked button ${i + 1}`);
+//   };
+//   buttons.push(button);
+//   document.body.appendChild(button);
+// }
+// console.log(buttons)
+
+
+class Person {
+    constructor(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+  
+    getFullName() {
+      return `${this.firstName} ${this.lastName}`;
+    }
+  }
+  
+  const person = new Person('John', 'Doe');
+  const getName = person.getFullName.bind(person);
+  console.log(getName()); // Expected: "John Doe", but throws an error or shows `undefined undefined`
+  
