@@ -1,9 +1,6 @@
-// array methods all .. 
-const users = ['Rumi', 'Raton', 'Rana', 'Raju']
-const newUsers = users.map(user => user+'s')
-console.log(newUsers)
+//filters practise
 
-const squareArr = [2, 3, 4, 5]
-const newSquare = squareArr.map(sq => sq * sq)
+const arr = [4, 5,6,7,8,9]
 
-console.log(newSquare)
+const getFilterArray = arr.filter(ar => ar % 2 === 0)
+console.log(getFilterArray)
