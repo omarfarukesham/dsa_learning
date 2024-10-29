@@ -82,18 +82,35 @@ class User {
 // console.log(buttons)
 
 
-class Person {
-    constructor(firstName, lastName) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-    }
+// class Person {
+//     constructor(firstName, lastName) {
+//       this.firstName = firstName;
+//       this.lastName = lastName;
+//     }
   
-    getFullName() {
-      return `${this.firstName} ${this.lastName}`;
-    }
+//     getFullName() {
+//       return `${this.firstName} ${this.lastName}`;
+//     }
+//   }
+  
+//   const person = new Person('John', 'Doe');
+//   const getName = person.getFullName.bind(person);
+//   console.log(getName()); 
+  
+
+  function createMultiplier(factor) {
+    return function(number) {
+      return number * factor;
+    };
   }
   
-  const person = new Person('John', 'Doe');
-  const getName = person.getFullName.bind(person);
-  console.log(getName()); // Expected: "John Doe", but throws an error or shows `undefined undefined`
+  const multipliers = [];
+  for (var i = 1; i <= 3; i++) {
+    multipliers.push(createMultiplier(i));
+  }
+  
+//   console.log(multipliersExpected 10, but may return unexpected results
+  console.log(multipliers ); //ed 20
+  console.log(multipliers ); // Expec```
+  
   
