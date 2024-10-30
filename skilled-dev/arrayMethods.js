@@ -37,19 +37,21 @@
 
 const array = ['Jeni', 'Bob', 'Carol'];
 
-const isFriend = (friends, name) => {
-  for (let i = 0; i < friends.length; i++) {
-    const friend = friends[i];
-    if (friend === name) {
-      return true;
-    }
-  }
-  return false;
-}
+// const isFriend1 = (friends, name) => {
+//   for (let i = 0; i < friends.length; i++) {
+//     const friend = friends[i];
+//     if (friend === name) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
-console.log(isFriend(array, 'Carol')); // true
 
-const findResult =  array.find(x => x === 'Carol')
+// const findResult =  array.find(x => x === 'Carol')
 
-console.log(findResult)
+// console.log(findResult)
 
+
+const isFriend = (friends, name) => friends.includes(name)
+console.log(isFriend(array, 'Bob')); // true
