@@ -35,7 +35,7 @@
 // }
 // console.log(newEvenArr)
 
-const array = ['Jeni', 'Bob', 'Carol'];
+// const array = ['Jeni', 'Bob', 'Carol'];
 
 // const isFriend1 = (friends, name) => {
 //   for (let i = 0; i < friends.length; i++) {
@@ -53,5 +53,25 @@ const array = ['Jeni', 'Bob', 'Carol'];
 // console.log(findResult)
 
 
-const isFriend = (friends, name) => friends.includes(name)
-console.log(isFriend(array, 'Bob')); // true
+// const isFriend = (friends, name) => friends.includes(name)
+// console.log(isFriend(array, 'Bob')); // true
+
+
+//find the friend if user provide the id no 
+const array = [
+    { id: 1, name: 'Jeni' },
+    { id: 2, name: 'Bob' },
+    { id: 3, name: 'Carol' },
+  ];
+
+
+  const findFriend = (friends, id)=>{
+    for (let i = 0; i < friends.length; i++) {
+        const friend = friends[i];
+        if (friend.id === id) {
+          return friend;
+        }
+      }
+  }
+
+  console.log(findFriend(array, 2).name)
