@@ -75,3 +75,9 @@ const array = [
   }
 
   console.log(findFriend(array, 2).name)
+
+  //2nd option by using array methods
+
+  const getFriend = (friends, id)=> friends.find((friend)=> friend.id === id)
+
+  console.log(getFriend(array, 1).name)
