@@ -81,3 +81,5 @@ const array = [
   const getFriend = (friends, id)=> friends.find((friend)=> friend.id === id)
 
   console.log(getFriend(array, 1).name)
+
+  
